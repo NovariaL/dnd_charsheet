@@ -54,4 +54,3 @@
 	<p>Your Proficiency Bonus is +{ProfBonus}</p>
 	<p>Your Acrobatics is {Acrobatics > 0 ? '+' : ''}{Acrobatics ? Acrobatics : 0}</p>
 </div>
-Cat
