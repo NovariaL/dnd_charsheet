@@ -1,4 +1,6 @@
 <script>
+  const TitleInfo1 = ["Class", "Level", "Background", "Player Name"];
+  const TitleInfo2 = ["Race", "Alignment", "Experience Points"];
   const AbilityScoretoModifier = (score) => {
     let result = Math.ceil((parseInt(score) - 11) / 2);
     if (result === -0) {
@@ -9,10 +11,12 @@
   let CharacterName = "";
   let CharacterLevel = "";
 </script>
+
 <head>
   <style>
     .flex-container {
       display: flex;
+      
       background-color: white;
     }
     .flex-containerCentered {
@@ -75,12 +79,10 @@
 <body>
   <div class="sizeFull">
     {@html "<!--Main-->"}
-    <header class="Title">Interactive Character Sheet</header>
     <div class="border sizeFull flex-container">
       {@html "<!--Title Bar-->"}
       <style>
       </style>
-
       <div class="border">
         {@html "<!--Character Name-->"}
         <input placeholder="Character Name" bind:value={CharacterName} />
@@ -88,42 +90,22 @@
       </div>
       <div class="border">
         {@html "<!--Character Info & Player Name-->"}
-        <div>
+       <div class="flex-container">
+        {#each TitleInfo1 as info}
           <div>
             <input />
-            <p>Class</p>
+            <p>{info}</p>
           </div>
-          <div>
-            <input />
-            <p>Level</p>
-          </div>
-          <div>
-            <input />
-            <p>Background</p>
-          </div>
-          <div>
-            <input />
-            <p>Player Name</p>
-          </div>
-        </div>
-        <div>
-          <div>
-            <input />
-            <p>Race</p>
-          </div>
-          <div>
-            <input />
-            <p>Alignment</p>
-          </div>
-          <div>
-            <input />
-            <p>Experience Points</p>
-          </div>
-        </div>
+        {/each}
       </div>
-      <div class=" flex-containerCentered">
-        <input />
-        <p />
+      <div class="flex-container">
+        {#each TitleInfo2 as info}
+          <div>
+            <input />
+            <p>{info}</p>
+          </div>
+        {/each}
+      </div>
       </div>
     </div>
   </div>
