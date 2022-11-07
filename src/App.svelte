@@ -1,56 +1,232 @@
-<script> 
-	const AbilityScoretoModifier = (score) => {
-		let Score = parseInt(score)
-		if (Score<1){0}
-		else if (Score<=1){return -5}
-		else if (Score<=3){return -4}
-		else if (Score<=5){return -3}
-		else if (Score<=7){return -2}
-		else if (Score<=9){return -1}
-		else if (Score<=11){return 0}
-		else if (Score<=13){return 1}
-		else if (Score<=15){return 2}
-		else if (Score<=17){return 3}
-		else if (Score<=19){return 4}
-		else if (Score<=21){return 5}
-		else if (Score<=23){return 6}
-		else if (Score<=25){return 7}
-		else if (Score<=27){return 8}
-		else if (Score<=29){return 9}
-		else if (Score<=30){return 10}
-		else if (Score>30){return 0}
-	}
-	let StrScore=''
-	let DexScore=''
-	let ConScore=''
-	let IntScore=''
-	let WisScore=''
-	let ChaScore=''
-	$: StrMod = AbilityScoretoModifier(StrScore)
-	$: DexMod = AbilityScoretoModifier(DexScore)
-	$: ConMod = AbilityScoretoModifier(ConScore)
-	$: IntMod = AbilityScoretoModifier(IntScore)
-	$: WisMod = AbilityScoretoModifier(WisScore)
-	$: ChaMod = AbilityScoretoModifier(ChaScore)
-	let ProfBonus=3
-	$: Athletics=ProfBonus+StrMod
-	$: Acrobatics=ProfBonus+DexMod
-	$: Arcana=ProfBonus+IntMod
-
+<script>
+  const AbilityScoretoModifier = (score) => {
+    let result = Math.ceil((parseInt(score) - 11) / 2);
+    if (result === -0) {
+      result = 0;
+    }
+    return result;
+  };
+  let CharacterName = "";
+  let CharacterLevel = "";
+  let StrScore = "";
+  let DexScore = "";
+  let ConScore = "";
+  let IntScore = "";
+  let WisScore = "";
+  let ChaScore = "";
+  $: StrMod = AbilityScoretoModifier(StrScore);
+  $: DexMod = AbilityScoretoModifier(DexScore);
+  $: ConMod = AbilityScoretoModifier(ConScore);
+  $: IntMod = AbilityScoretoModifier(IntScore);
+  $: WisMod = AbilityScoretoModifier(WisScore);
+  $: ChaMod = AbilityScoretoModifier(ChaScore);
+  let ProfBonus = 3;
+  $: Athletics = ProfBonus + StrMod;
+  $: Acrobatics = ProfBonus + DexMod;
+  $: ConSave = ProfBonus + ConMod;
+  $: Arcana = ProfBonus + IntMod;
+  $: Insight = ProfBonus + WisMod;
+  $: Performance = ProfBonus + ChaMod;
 </script>
-<div>
-	<header>Str Calculator</header>
-	<input placeholder='Str Score' bind:value={StrScore}/>
-	<p>Your Str is {StrScore ? parseInt(StrScore) : 0}</p>
-	<p>Your Str Mod is {StrMod > 0 ? '+' : ''}{StrMod ? StrMod : 0}</p>
-	<p>Your Proficiency Bonus is +{ProfBonus}</p>
-	<p>Your Athletics is {Athletics > 0 ? '+' : ''}{Athletics ? Athletics : 0}</p>
-</div>
-<div>
-	<header>Dex Calculator</header>
-	<input placeholder='Dex Score' bind:value={DexScore}/>
-	<p>Your Dex is {DexScore ? parseInt(DexScore) : 0}</p>
-	<p>Your Dex Mod is {DexMod > 0 ? '+' : ''}{DexMod ? DexMod : 0}</p>
-	<p>Your Proficiency Bonus is +{ProfBonus}</p>
-	<p>Your Acrobatics is {Acrobatics > 0 ? '+' : ''}{Acrobatics ? Acrobatics : 0}</p>
-</div>
+
+<head>
+  <style>
+    .flex-container {
+      display: flex;
+      background-color: white;
+    }
+    .flex-containerCentered {
+      display: flex;
+      background-color: white;
+      justify-content: space-evenly;
+    }
+    .flex-container > div {
+      background-color: #fff;
+      margin: 10px;
+      padding: 5%;
+      font-size: 20px;
+    }
+    .border {
+      border: 2px solid black;
+      padding: 1%;
+      margin: 5px;
+      border-radius: 10px;
+    }
+    .sizeFull {
+      height: 100%;
+      width: 100%;
+    }
+    .Title {
+      margin: 10px;
+    }
+    div {
+      color: black;
+      font-family: Calibri;
+    }
+    input {
+      background-color: lightgrey;
+      text-align: center;
+      color: black;
+      font-family: Calibri;
+      font-size: 1em;
+      width: 80%;
+      margin: 0 5px;
+      padding: 5px;
+    }
+    head {
+      height: 100%;
+      width: 100%;
+    }
+    body {
+      background-color: white;
+      margin: 0px;
+      height: 100%;
+      width: 100%;
+    }
+    p {
+      font-size: 20px;
+    }
+    header {
+      font-size: 40px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="sizeFull">
+    {@html "<!--Main-->"}
+    <header class="Title">Interactive Character Sheet</header>
+    <div class="border sizeFull flex-container">
+      {@html "<!--Title Bar-->"}
+      <style>
+      </style>
+
+      <div class="border">
+        {@html "<!--Character Name-->"}
+        <input placeholder="Character Name" bind:value={CharacterName} />
+        <p>Character Name</p>
+      </div>
+      <div class="border">
+        {@html "<!--Character Info & Player Name-->"}
+        <div>
+          <div class="border">
+            <input />
+            <p>Class</p>
+          </div>
+          <div class="border">
+            <input />
+            <p>Level</p>
+          </div>
+          <div>
+            <input />
+            <p>Background</p>
+          </div>
+          <div>
+            <input />
+            <p>Player Name</p>
+          </div>
+        </div>
+        <div>
+          <div>
+            <input />
+            <p>Class</p>
+          </div>
+          <div>
+            <input />
+            <p>Level</p>
+          </div>
+          <div>
+            <input />
+            <p>Background</p>
+          </div>
+          <div>
+            <input />
+            <p>Player Name</p>
+          </div>
+        </div>
+      </div>
+      <div class=" flex-containerCentered">
+        <input />
+        <p />
+      </div>
+    </div>
+
+    <div class="border sizeFull">
+      {@html "<!--Body-->"}
+      <div class="border">
+        {@html "<!--Ability Score Calculators-->"}
+
+        <div class="border">
+          {@html "<!--Strength Score Calculator-->"}
+          <header class="border">Strength</header>
+          <input placeholder="Str Score" bind:value={StrScore} />
+          <p>Your Str is {StrScore ? parseInt(StrScore) : 0}</p>
+          <p>Your Str Mod is {StrMod > 0 ? "+" : ""}{StrMod ? StrMod : 0}</p>
+          <p>Your Proficiency Bonus is +{ProfBonus}</p>
+          <p>
+            Your Athletics is {Athletics > 0 ? "+" : ""}{Athletics
+              ? Athletics
+              : 0}
+          </p>
+        </div>
+        <div class="border">
+          {@html "<!--Dexterity Score Calculator-->"}
+          <header class="border">Dexterity</header>
+          <input placeholder="Dex Score" bind:value={DexScore} />
+          <p>Your Dex is {DexScore ? parseInt(DexScore) : 0}</p>
+          <p>Your Dex Mod is {DexMod > 0 ? "+" : ""}{DexMod ? DexMod : 0}</p>
+          <p>Your Proficiency Bonus is +{ProfBonus}</p>
+          <p>
+            Your Acrobatics is {Acrobatics > 0 ? "+" : ""}{Acrobatics
+              ? Acrobatics
+              : 0}
+          </p>
+        </div>
+        <div class="border">
+          {@html "<!--Constitution Score Calculator-->"}
+          <header class="border">Constitution</header>
+          <input placeholder="Con Score" bind:value={ConScore} />
+          <p>Your Con is {ConScore ? parseInt(ConScore) : 0}</p>
+          <p>Your Con Mod is {ConMod > 0 ? "+" : ""}{ConMod ? DexMod : 0}</p>
+          <p>Your Proficiency Bonus is +{ProfBonus}</p>
+          <p>
+            Your Con Save is {ConSave > 0 ? "+" : ""}{ConSave ? ConSave : 0}
+          </p>
+        </div>
+        <div class="border">
+          {@html "<!--Intelligence Score Calculator-->"}
+          <header class="border">Intelligence</header>
+          <input placeholder="Int Score" bind:value={IntScore} />
+          <p>Your Int is {IntScore ? parseInt(IntScore) : 0}</p>
+          <p>Your Int Mod is {IntMod > 0 ? "+" : ""}{IntMod ? IntMod : 0}</p>
+          <p>Your Proficiency Bonus is +{ProfBonus}</p>
+          <p>Your Arcana is {Arcana > 0 ? "+" : ""}{Arcana ? Arcana : 0}</p>
+        </div>
+        <div class="border">
+          {@html "<!--Wisdom Score Calculator-->"}
+          <header class="border">Wisdom</header>
+          <input placeholder="Wis Score" bind:value={WisScore} />
+          <p>Your Wis is {WisScore ? parseInt(WisScore) : 0}</p>
+          <p>Your Wis Mod is {WisMod > 0 ? "+" : ""}{WisMod ? WisMod : 0}</p>
+          <p>Your Proficiency Bonus is +{ProfBonus}</p>
+          <p>Your Insight is {Insight > 0 ? "+" : ""}{Insight ? Insight : 0}</p>
+        </div>
+        <div class="border">
+          {@html "<!--Charisma Score Calculator-->"}
+          <header class="border">Charisma</header>
+          <input placeholder="Cha Score" bind:value={ChaScore} />
+          <p>Your Cha is {ChaScore ? parseInt(IntScore) : 0}</p>
+          <p>Your Cha Mod is {ChaMod > 0 ? "+" : ""}{ChaMod ? ChaMod : 0}</p>
+          <p>Your Proficiency Bonus is +{ProfBonus}</p>
+          <p>
+            Your Performance is {Performance > 0 ? "+" : ""}{Performance
+              ? Performance
+              : 0}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+  </style>
+</body>
