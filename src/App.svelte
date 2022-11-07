@@ -1,4 +1,6 @@
 <script>
+  import './Titlebar.svelte'
+  import Titlebar from './Titlebar.svelte';
   const AbilityScoretoModifier = (score) => {
     let result = Math.ceil((parseInt(score) - 11) / 2);
     if (result === -0) {
@@ -96,62 +98,8 @@
   <div class="sizeFull">
     {@html "<!--Main-->"}
     <header class="Title">Interactive Character Sheet</header>
-    <div class="border sizeFull flex-container">
-      {@html "<!--Title Bar-->"}
-      <style>
-      </style>
-
-      <div class="border">
-        {@html "<!--Character Name-->"}
-        <input placeholder="Character Name" bind:value={CharacterName} />
-        <p>Character Name</p>
-      </div>
-      <div class="border">
-        {@html "<!--Character Info & Player Name-->"}
-        <div>
-          <div class="border">
-            <input />
-            <p>Class</p>
-          </div>
-          <div class="border">
-            <input />
-            <p>Level</p>
-          </div>
-          <div>
-            <input />
-            <p>Background</p>
-          </div>
-          <div>
-            <input />
-            <p>Player Name</p>
-          </div>
-        </div>
-        <div>
-          <div>
-            <input />
-            <p>Class</p>
-          </div>
-          <div>
-            <input />
-            <p>Level</p>
-          </div>
-          <div>
-            <input />
-            <p>Background</p>
-          </div>
-          <div>
-            <input />
-            <p>Player Name</p>
-          </div>
-        </div>
-      </div>
-      <div class=" flex-containerCentered">
-        <input />
-        <p />
-      </div>
-    </div>
-
-    <div class="border sizeFull">
+    <Titlebar/>
+        <div class="border sizeFull">
       {@html "<!--Body-->"}
       <div class="border">
         {@html "<!--Ability Score Calculators-->"}
