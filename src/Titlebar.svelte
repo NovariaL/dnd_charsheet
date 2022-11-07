@@ -1,6 +1,14 @@
 <script>
-  const TitleInfo1 = ["Class", "Level", "Background", "Player Name"];
-  const TitleInfo2 = ["Race", "Alignment", "Experience Points"];
+  const TitleInfo = [
+    "Class",
+    "Level",
+    "Background",
+    "Player Name",
+    "Race",
+    "Alignment",
+    "Experience Points",
+  ];
+
   const AbilityScoretoModifier = (score) => {
     let result = Math.ceil((parseInt(score) - 11) / 2);
     if (result === -0) {
@@ -16,7 +24,7 @@
   <style>
     .flex-container {
       display: flex;
-      
+
       background-color: white;
     }
     .flex-containerCentered {
@@ -90,22 +98,22 @@
       </div>
       <div class="border">
         {@html "<!--Character Info & Player Name-->"}
-       <div class="flex-container">
-        {#each TitleInfo1 as info}
-          <div>
-            <input />
-            <p>{info}</p>
-          </div>
-        {/each}
-      </div>
-      <div class="flex-container">
-        {#each TitleInfo2 as info}
-          <div>
-            <input />
-            <p>{info}</p>
-          </div>
-        {/each}
-      </div>
+        <div class="flex-containerCentered">
+          {#each TitleInfo.slice(0, 4) as info}
+            <div>
+              <input />
+              <p>{info}</p>
+            </div>
+          {/each}
+        </div>
+        <div class="flex-containerCentered">
+          {#each TitleInfo.slice(4) as info}
+            <div>
+              <input />
+              <p>{info}</p>
+            </div>
+          {/each}
+        </div>
       </div>
     </div>
   </div>
