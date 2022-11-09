@@ -1,3 +1,4 @@
+<!-- add keys to the title info each statement -->
 <script>
   import './Titlebar.svelte'
   import Titlebar from './Titlebar.svelte';
