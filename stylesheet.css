@@ -1,29 +1,32 @@
-a {
-  font-family: Arial, Helvetica, sans-serif;
-  color: black;
+header{
+ 
 }
-h3 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-style: italic;
+.banner{
+  position: relative;
 }
-h1{
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: purple;
-  color: pink;
-  text-align: center;
+.banner img{
+  max-width: 100%;
 }
-div{
-  display: flex;
-  flex-direction: column;
+.banner .welcome{
+  background-color: #feb614;
+  color: white;
+  padding: 30px;
+  position: absolute;
+  left: 0;
+  top: 10%;
 }
-/* I love you */
-body{
-  background: linear-gradient(45deg, red, orange, yellow, green, blue, purple);
-  background-repeat: no-repeat;
-  height: 100%
-  width: 100%
+.banner h2{
+  font-size: 50px;
 }
-html{
-    height: 100%;
-    width: 100%;
+.banner h2 span{
+  font-size: 1.3em;
+}
+img {
+  max-width: 100%;
+}
+ul {
+  color: white;
+}
+body {
+background-color: #feb614;
 }
